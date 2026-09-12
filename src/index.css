@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-primary: #0F1A2C;
+    --color-brand-accent: #0D9488;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* High-visibility focus indicators for WCAG 2.2 AA */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-teal-600 ring-offset-2 ring-offset-white;
+  }
+
+  button, input, select, textarea {
+    touch-action: manipulation;
+  }
+}
+
+@layer utilities {
+  /* Subtle medical/tech grid pattern */
+  .bg-grid-pattern {
+    background-size: 36px 36px;
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+  }
+
+  /* Animated subtle grid shift */
+  .bg-grid-animated {
+    animation: gridShift 30s linear infinite;
+  }
+
+  /* 3D Shimmer effect for cards on hover */
+  .shimmer-effect {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.5) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 255, 255, 0.5) 55%,
+      transparent 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* 3D Perspective scene wrapper */
+  .scene-3d {
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+  }
+
+  /* 3D transform utilities */
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Glow elevation shadow */
+  .shadow-glow-teal {
+    box-shadow: 0 0 24px rgba(45, 212, 191, 0.35), 0 4px 16px rgba(15, 23, 42, 0.08);
+  }
+
+  .shadow-glow-blue {
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.35), 0 4px 16px rgba(15, 23, 42, 0.08);
+  }
+
+  /* 3D floating badge */
+  .badge-3d {
+    transform: translateZ(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* 3D depth card highlight border */
+  .border-3d-inset {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 36px 36px; }
+}
+
+/* Accessibility: Disable all motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Print Styles: Print ONLY the Official Clinical Records
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 1.2cm 1.5cm;
+    size: auto;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Hide all app chrome, header, backgrounds, and non-record UI */
+  header,
+  nav,
+  canvas,
+  .bg-grid-pattern,
+  .bg-grid-animated,
+  .no-print,
+  [data-no-print] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Expand main container to full printable width */
+  main {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Avoid unwanted page breaks inside record blocks */
+  .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Crisp borders & contrast for black-and-white / color laser printers */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
