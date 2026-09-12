@@ -517,7 +517,7 @@ Potential next steps include:
 
 **Varsha S**
 
-Frontend Developer | React | TypeScript | UI/UX
+Web Application Developer| Android Application Developer|Frontend Developer | React | TypeScript | UI/UX
 
 ---
 
